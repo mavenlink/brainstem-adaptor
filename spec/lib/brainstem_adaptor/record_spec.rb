@@ -41,6 +41,32 @@ describe BrainstemAdaptor::Record do
   its(:response) { should == response }
   its(:associations_specification) { should == specification['users']['associations'] }
 
+  context 'invalid response' do
+    context 'collection is not described in specification' do
+      let(:specification) { {} }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /association/
+      end
+    end
+
+    context 'collection is not included in response' do
+      let(:response_data) { {} }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /collection/
+      end
+    end
+
+    context 'record is not listed in collection' do
+      let(:response_data) { { 'users' => {} } }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /record/
+      end
+    end
+  end
+
   describe '#[]' do
     specify do
       expect(subject['name']).to eq('Petr')
@@ -86,32 +112,6 @@ describe BrainstemAdaptor::Record do
 
     specify do
       expect(subject.has_association?('something invalid')).to eq(false)
-    end
-  end
-
-  context 'invalid response' do
-    context 'collection is not described in specification' do
-      let(:specification) { {} }
-
-      specify do
-        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /association/
-      end
-    end
-
-    context 'collection is not included in response' do
-      let(:response_data) { {} }
-
-      specify do
-        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /collection/
-      end
-    end
-
-    context 'record is not listed in collection' do
-      let(:response_data) { { 'users' => {} } }
-
-      specify do
-        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /record/
-      end
     end
   end
 end
