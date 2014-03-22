@@ -50,9 +50,14 @@ response.count                 # returns total count as Integer
 # ...
 response.results               # returns Array<BrainstemAdaptor::Record>
 response.results[0]['friends'] # returns Array<BrainstemAdaptor::Record>
+
+response.results[0]['friends'].last['name']
+
 response.results[0]['name']    # returns String
 response.results[0].id         # returns String or Integer
 response.results[0]['mom']     # returns BrainstemAdaptor::Record
+
+response.results[0]['mom']['name']
 # ...
 response['users']              # returns plain Hash as is from response
 response['count']              # same here, Integer
