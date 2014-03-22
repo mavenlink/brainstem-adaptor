@@ -188,4 +188,12 @@ describe BrainstemAdaptor::Association do
       expect(nickolai_enemy.reflect).to eq(anatolii)
     end
   end
+
+  context 'association does not exist' do
+    subject { described_class.new(nickolai_user, 'something wrong') }
+
+    specify do
+      expect { subject }.to raise_error ArgumentError, /specification/
+    end
+  end
 end
