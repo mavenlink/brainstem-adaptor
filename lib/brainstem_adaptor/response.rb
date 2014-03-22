@@ -30,6 +30,7 @@ module BrainstemAdaptor
     def count
       self[:count]
     end
+    alias_method :total_count, :count
 
     # Returns results has with proper ordering
     # @return [Array<BrainstemAdaptor::Record>]

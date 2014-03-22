@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe BrainstemAdaptor::Response do
-  let(:json_response) do
+  let(:plain_text_response) do
     <<-JSON_RESPONSE
     {
-      "count": 2,
+      "count": 99,
       "results": [{ "key": "workspaces", "id": "10" }, { "key": "workspaces", "id": "11" }],
       "workspaces": {
         "10": {
@@ -29,7 +29,7 @@ describe BrainstemAdaptor::Response do
     JSON_RESPONSE
   end
 
-  let(:response_hash) { BrainstemAdaptor.parser.parse(json_response) }
+  let(:response_hash) { BrainstemAdaptor.parser.parse(plain_text_response) }
 
   let(:specification) do
     {
@@ -38,7 +38,7 @@ describe BrainstemAdaptor::Response do
           'title' => {
             'type' => 'string',
             'required' => true
-          },
+          }
         },
         'associations' => {
           'participants' => {
@@ -56,7 +56,7 @@ describe BrainstemAdaptor::Response do
           'full_name' => {
             'type' => 'string',
             'required' => true
-          },
+          }
         }
       }
     }
@@ -66,12 +66,12 @@ describe BrainstemAdaptor::Response do
     BrainstemAdaptor.specification = specification
   end
 
-  subject(:response) do
-    described_class.new(json_response)
-  end
+  let(:response_data) { plain_text_response }
+
+  subject(:response) { described_class.new(response_data) }
 
   describe 'collection' do
-    its(:count) { should == 2 }
+    its(:count) { should == 99 }
 
     specify do
       expect(response.results).to have(2).records
@@ -143,6 +143,30 @@ describe BrainstemAdaptor::Response do
       specify do
         expect(response.results[1]['primary_counterpart']).to be_a BrainstemAdaptor::Record
       end
+    end
+  end
+
+  context 'invalid JSON format' do
+    let(:response_data) { 'test; invalid " json ' }
+
+    specify do
+      expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError
+    end
+  end
+
+  context 'parsed input' do
+    let(:response_data) { response_hash }
+
+    specify do
+      expect(subject.response_data).to eq(response_data)
+    end
+  end
+
+  context 'invalid input' do
+    let(:response_data) { nil }
+
+    specify do
+      expect { subject }.to raise_error ArgumentError, /Expected String/
     end
   end
 end

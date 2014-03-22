@@ -45,9 +45,9 @@ module BrainstemAdaptor
 
     # @param name [String]
     # @raise [ArgumentError] if name is not related to any association
-    # @return [BrainstemAdaptor::Reflection]
+    # @return [BrainstemAdaptor::Association]
     def association_by_name(name)
-      (@associations ||= {})[name] ||= BrainstemAdaptor::Reflection.new(self, name)
+      (@associations ||= {})[name] ||= BrainstemAdaptor::Association.new(self, name)
     end
   end
 end

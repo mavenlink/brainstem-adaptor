@@ -1,6 +1,6 @@
 require 'json'
 require 'brainstem_adaptor/specification'
-require 'brainstem_adaptor/reflection'
+require 'brainstem_adaptor/association'
 require 'brainstem_adaptor/record'
 require 'brainstem_adaptor/invalid_response_error'
 require 'brainstem_adaptor/response'
