@@ -15,14 +15,6 @@ module BrainstemAdaptor
       @response_data[key.to_s]
     end
 
-    # Returns response collection by name
-    # @return [Array<BrainstemAdaptor::Record>]
-    def collection(name)
-      self[name].keys.map do |id|
-        BrainstemAdaptor::Record.new(name, id, self)
-      end
-    end
-
     # @return [Integer]
     def count
       self[:count]
