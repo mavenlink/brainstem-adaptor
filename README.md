@@ -1,4 +1,5 @@
 ## Ruby Brainstem adapter
+[![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
 
 Create specification for your API.
 
