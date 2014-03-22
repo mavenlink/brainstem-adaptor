@@ -1,3 +1,4 @@
+require 'yaml'
 require 'json'
 require 'brainstem_adaptor/specification'
 require 'brainstem_adaptor/association'
@@ -27,5 +28,10 @@ module BrainstemAdaptor
   # @param specification [Hash]
   def self.specification=(specification)
     BrainstemAdaptor::Specification[:default] = specification
+  end
+
+  # @param path [String] Path to YML specification file
+  def self.load_specification(path)
+    self.specification = YAML::load_file(path)
   end
 end
