@@ -1,4 +1,4 @@
-== Ruby Brainstem adapter
+## Ruby Brainstem adapter
 
 Create specification for your API.
 
@@ -58,7 +58,7 @@ response['users']              # returns plain Hash as is from response
 response['count']              # same here, Integer
 ```
 
-=== Multiple specifications?
+### Multiple specifications?
 
 Supported.
 
