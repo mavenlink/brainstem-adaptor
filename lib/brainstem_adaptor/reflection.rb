@@ -2,7 +2,7 @@ module BrainstemAdaptor
   class Reflection
     include Enumerable
 
-    attr_reader :name, :record, :specification
+    attr_reader :name, :record, :specification, :collection_name
 
     # @param record [BrainstemAdaptor::Record]
     # @param name [String, Symbol]
@@ -13,7 +13,13 @@ module BrainstemAdaptor
 
       @record = record
       @specification = record.associations_specification[name]
+      @collection_name = @specification['collection'] || name
       @name = name.to_s
+    end
+
+    # @param order [Integer] Index in collection starting from zero
+    def [](order)
+      records[order]
     end
 
     # @return [Enumerable]
@@ -23,9 +29,26 @@ module BrainstemAdaptor
 
     # @return [Array<BrainstemAdaptor::Record>]
     def records
-      record[specification['foreign_key']].map do |id|
-        BrainstemAdaptor::Record.new(name, id, record.response)
+      [*ids].map do |id|
+        BrainstemAdaptor::Record.new(collection_name, id, record.response)
       end
+    end
+
+    # Returns relation object for has_many associations and record for has_one
+    # Acts as AR::find for has_one associations, as AR::where for has_many
+    # @return [BrainstemAdaptor::Record, self]
+    def reflect
+      ids.is_a?(Array) ? self : records.first
+    end
+
+    def ==(other)
+      other == each.to_a
+    end
+
+    private
+
+    def ids
+      record[specification['foreign_key']]
     end
   end
 end

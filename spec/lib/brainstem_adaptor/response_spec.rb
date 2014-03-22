@@ -33,29 +33,29 @@ describe BrainstemAdaptor::Response do
 
   let(:specification) do
     {
-      workspaces: {
-        fields: {
-          title: {
-            type: 'string',
-            required: true
+      'workspaces' => {
+        'fields' => {
+          'title' => {
+            'type' => 'string',
+            'required' => true
           },
         },
-        associations: {
-          participants: {
-            foreign_key: 'participant_ids',
-            collection: 'users'
+        'associations' => {
+          'participants' => {
+            'foreign_key' => 'participant_ids',
+            'collection' => 'users'
           },
-          primary_counterpart: {
-            foreign_key: 'primary_counterpart_id',
-            collection: 'users'
+          'primary_counterpart' => {
+            'foreign_key' => 'primary_counterpart_id',
+            'collection' => 'users'
           }
         }
       },
-      users: {
-        fields: {
-          full_name: {
-            type: 'string',
-            required: true
+      'users' => {
+        'fields' => {
+          'full_name' => {
+            'type' => 'string',
+            'required' => true
           },
         }
       }
@@ -109,28 +109,40 @@ describe BrainstemAdaptor::Response do
       expect(response['users']).to eq(response_hash['users'])
     end
 
-    specify do
-      expect(response.results[0]['participants'][0]).to be_a BrainstemAdaptor::Record
+    describe '"has many" relations' do
+      specify do
+        expect(response.results[0]['participants'][0]).to be_a BrainstemAdaptor::Record
+      end
+
+      specify do
+        expect(response.results[0]['participants'][1]).to be_a BrainstemAdaptor::Record
+      end
+
+      specify do
+        expect(response.results[1]['participants'][0]).to be_a BrainstemAdaptor::Record
+      end
+
+      specify do
+        expect(response.results[1]['participants'][1]).to be_a BrainstemAdaptor::Record
+      end
+
+      specify do
+        expect(response.results[0]['participants']).to eq([response_hash['users']['2'], response_hash['users']['6']])
+      end
+
+      specify do
+        expect(response.results[1]['participants']).to eq([response_hash['users']['2'], response_hash['users']['8']])
+      end
     end
 
-    specify do
-      expect(response.results[0]['participants'][1]).to be_a BrainstemAdaptor::Record
-    end
+    describe '"has one" relations' do
+      specify do
+        expect(response.results[0]['primary_counterpart']).to be_a BrainstemAdaptor::Record
+      end
 
-    specify do
-      expect(response.results[1]['participants'][0]).to be_a BrainstemAdaptor::Record
-    end
-
-    specify do
-      expect(response.results[1]['participants'][1]).to be_a BrainstemAdaptor::Record
-    end
-
-    specify do
-      expect(response.results[0]['participants']).to eq([response_hash['users']['2'], response_hash['users']['6']])
-    end
-
-    specify do
-      expect(response.results[1]['participants']).to eq([response_hash['users']['2'], response_hash['users']['8']])
+      specify do
+        expect(response.results[1]['primary_counterpart']).to be_a BrainstemAdaptor::Record
+      end
     end
   end
 end

@@ -24,7 +24,7 @@ module BrainstemAdaptor
       if has_key?(key = key.to_s)
         super
       elsif has_association?(key)
-        reflect_on_association(key)
+        association_by_name(key).reflect
       end
     end
 
@@ -43,7 +43,7 @@ module BrainstemAdaptor
     # @param name [String]
     # @raise [ArgumentError] if name is not related to any association
     # @return [BrainstemAdaptor::Reflection]
-    def reflect_on_association(name)
+    def association_by_name(name)
       (@associations ||= {})[name] ||= BrainstemAdaptor::Reflection.new(self, name)
     end
 

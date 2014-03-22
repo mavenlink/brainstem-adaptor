@@ -5,11 +5,11 @@ module BrainstemAdaptor
     end
 
     def self.[](key)
-      instances[key.to_sym]
+      self.instances[key.to_sym]
     end
 
     def self.[]=(key, value)
-      instances[key.to_sym] = self.new(value)
+      self.instances[key.to_sym] = self.new.merge!(value)
     end
   end
 end
