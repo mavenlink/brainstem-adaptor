@@ -4,17 +4,20 @@ module BrainstemAdaptor
 
     # @param collection_name [String, Symbol]
     # @param id
-    # @param response [BrainstemAdaptor::Response, nil]
-    def initialize(collection_name, id, response = nil)
+    # @param response [BrainstemAdaptor::Response]
+    def initialize(collection_name, id, response)
       @collection_name = collection_name.to_s
       @id = id
       @response = response
 
-      collection = response[@collection_name] or
-        raise BrainstemAdaptor::InvalidResponse, "No such collection #@collection_name"
+      @specification = @response.specification[collection_name] or
+        raise BrainstemAdaptor::InvalidResponseError, "Can't find '#{collection_name}' association in specification"
+
+      collection = @response[@collection_name] or
+        raise BrainstemAdaptor::InvalidResponseError, "No such collection #@collection_name"
 
       fields = collection[@id] or
-        raise BrainstepAdaptor::InvalidResponse, "No such record #{@collection_name}##{@id}"
+        raise BrainstemAdaptor::InvalidResponseError, "No such record #{@collection_name}##{@id}"
 
       merge!(fields)
     end
@@ -30,7 +33,7 @@ module BrainstemAdaptor
 
     # @return [Hash]
     def associations_specification
-      @associations_specification ||= specification['associations'] || {}
+      @associations_specification ||= @specification['associations'] || {}
     end
 
     # @param name [String]
@@ -45,11 +48,6 @@ module BrainstemAdaptor
     # @return [BrainstemAdaptor::Reflection]
     def association_by_name(name)
       (@associations ||= {})[name] ||= BrainstemAdaptor::Reflection.new(self, name)
-    end
-
-    # @return [Hash]
-    def specification
-      @response.specification[collection_name]
     end
   end
 end

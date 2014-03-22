@@ -2,11 +2,21 @@ module BrainstemAdaptor
   class Response
     attr_reader :response_data, :specification
 
-    # @param json_response [String]
+    # @param response_data [String, Hash]
     # @param specification [BrainstemAdaptor::Specification]
-    def initialize(json_response, specification = BrainstemAdaptor.default_specification)
-      @response_data = BrainstemAdaptor.parser.parse(json_response)
-      @specification = specification
+    def initialize(response_data, specification = BrainstemAdaptor.default_specification)
+      @specification = specification or raise ArgumentError, 'Specification is not set'
+
+      case response_data
+      when String
+        @response_data = BrainstemAdaptor.parser.parse(response_data)
+      when Hash
+        @response_data = response_data
+      else
+        raise ArgumentError, "Expected String, got #{@response_data.class.name}"
+      end
+    rescue JSON::ParserError => e
+      raise BrainstemAdaptor::InvalidResponseError, response_data, e.message
     end
 
     # @param key [String, Symbol]
@@ -15,6 +25,7 @@ module BrainstemAdaptor
       @response_data[key.to_s]
     end
 
+    # Returns __TOTAL__ number of records
     # @return [Integer]
     def count
       self[:count]

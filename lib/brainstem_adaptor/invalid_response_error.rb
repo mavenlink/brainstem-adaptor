@@ -1,5 +1,5 @@
 module BrainstemAdaptor
-  class InvalidResponse < StandardError
+  class InvalidResponseError < StandardError
     attr_reader :response
 
     # @param [Hash] response

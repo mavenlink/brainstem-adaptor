@@ -47,7 +47,7 @@ module BrainstemAdaptor
 
     private
 
-    def ids
+    def ids # TODO(SZ): move to public?
       record[specification['foreign_key']]
     end
   end
