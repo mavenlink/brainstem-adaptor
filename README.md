@@ -1,7 +1,7 @@
 ## Ruby Brainstem adapter
 [![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
 
-Create specification for your API.
+#### Create specification for your API.
 The only thing is missing in Brainstem responses: __associations information__.
 Eg having "user_ids" field does not guarantee that "user_ids" are related to "users" collection.
 Specification is the thing which describes missing information about responses you receive.
