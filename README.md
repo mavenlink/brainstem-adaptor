@@ -2,23 +2,15 @@
 [![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
 
 Create specification for your API.
+The only thing is missing in Brainstem responses: __associations information__.
+Eg having "user_ids" field does not guarantee that "user_ids" are related to "users" collection.
+Specification is the thing which describes missing information about responses you receive.
+You can also put any additional information you need in your specification (see `projects: :fields` below).
 
 ```yaml
 ---
 # my_api_service.yml file
 users:
-  fields:
-    name:
-      type: "string"
-      required: true
-    friend_ids:
-      type: "array"
-    cost:
-      type: "integer"
-      required: false
-    mom_id:
-      type: "string"
-
   associations:
     friends:
       foreign_key: friend_ids
@@ -31,6 +23,7 @@ projects:
   fields:
     name:
       type: string
+      required: true
     employee_ids:
       type: array
 

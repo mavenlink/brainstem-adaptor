@@ -34,12 +34,6 @@ describe BrainstemAdaptor::Response do
   let(:specification) do
     {
       'workspaces' => {
-        'fields' => {
-          'title' => {
-            'type' => 'string',
-            'required' => true
-          }
-        },
         'associations' => {
           'participants' => {
             'foreign_key' => 'participant_ids',
@@ -51,14 +45,7 @@ describe BrainstemAdaptor::Response do
           }
         }
       },
-      'users' => {
-        'fields' => {
-          'full_name' => {
-            'type' => 'string',
-            'required' => true
-          }
-        }
-      }
+      'users' => nil
     }
   end
 

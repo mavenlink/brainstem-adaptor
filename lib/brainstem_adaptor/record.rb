@@ -10,8 +10,11 @@ module BrainstemAdaptor
       @id = id
       @response = response
 
-      @specification = @response.specification[collection_name] or
+      if @response.specification.has_key?(collection_name)
+        @specification = @response.specification[collection_name] || {}
+      else
         raise BrainstemAdaptor::InvalidResponseError, "Can't find '#{collection_name}' association in specification"
+      end
 
       collection = @response[@collection_name] or
         raise BrainstemAdaptor::InvalidResponseError, "No such collection #@collection_name"
