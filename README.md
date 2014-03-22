@@ -3,7 +3,7 @@
 
 #### Create specification for your API.
 The only thing is missing in Brainstem responses: __associations information__.
-Eg having "user_ids" field does not guarantee that "user_ids" are related to "users" collection.
+Eg having "customer_ids" field does not guarantee that "customer_ids" are related to "customers" collection, it may be stored in "users" collection.
 Specification is the thing which describes missing information about responses you receive.
 You can also put any additional information you need in your specification (see `projects: :fields` below).
 
