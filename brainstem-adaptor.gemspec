@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.extra_rdoc_files = ["README.md"]
 
-  s.description = %q{Simple Ruby adator for Branstem}
-  s.summary = %q{Plays with Brainstem}
+  s.description = %q{Parses Brainstem responses, makes it convenient to organize access to your data.}
+  s.summary = %q{Brainstem API wrapper}
 
   s.add_development_dependency 'rspec'
 end
