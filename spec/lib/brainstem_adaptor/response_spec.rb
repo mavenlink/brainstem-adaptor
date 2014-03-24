@@ -186,4 +186,12 @@ describe BrainstemAdaptor::Response do
       expect(subject.to_hash).to eq(response_hash)
     end
   end
+
+  describe '#==' do
+    let(:response_data) { { 'count' => 1, 'results' => [{'key' => 'user', 'value' => 2}] } }
+
+    specify do
+      expect(subject).to eq(response_data)
+    end
+  end
 end

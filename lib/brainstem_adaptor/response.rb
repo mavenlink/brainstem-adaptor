@@ -49,5 +49,9 @@ module BrainstemAdaptor
         BrainstemAdaptor::Record.new(result['key'], result['id'], self)
       end
     end
+
+    def ==(other)
+      other == response_data
+    end
   end
 end
