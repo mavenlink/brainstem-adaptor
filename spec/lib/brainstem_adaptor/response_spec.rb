@@ -168,7 +168,15 @@ describe BrainstemAdaptor::Response do
       let(:response_data) { { 'count' => 0 } }
 
       specify do
-        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /results/
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /results.*returned/
+      end
+    end
+
+    context 'results collection is not an array' do
+      let(:response_data) { { 'count' => 0, 'results' => {} } }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /results.*array/
       end
     end
   end

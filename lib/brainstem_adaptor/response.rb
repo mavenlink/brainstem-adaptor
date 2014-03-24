@@ -18,6 +18,7 @@ module BrainstemAdaptor
 
       raise InvalidResponseError, "count isn't returned" unless @response_data['count']
       raise InvalidResponseError, "results collection isn't returned" unless @response_data['results']
+      raise InvalidResponseError, "results collection is not an array" unless @response_data['results'].is_a?(Array)
 
     rescue JSON::ParserError => e
       raise BrainstemAdaptor::InvalidResponseError, response_data, e.message
