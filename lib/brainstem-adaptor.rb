@@ -1,5 +1,8 @@
 require 'yaml'
 require 'json'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/core_ext/hash/slice'
+require 'active_support/core_ext/object/try'
 require 'brainstem_adaptor/specification'
 require 'brainstem_adaptor/association'
 require 'brainstem_adaptor/record'
@@ -7,7 +10,7 @@ require 'brainstem_adaptor/invalid_response_error'
 require 'brainstem_adaptor/response'
 
 module BrainstemAdaptor
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 
   def self.parser
     @parser ||= JSON

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe BrainstemAdaptor::Record do
   let(:response_data) do
     {
+      'count' => 0,
+      'results' => [],
       'users' => {
         '12' => { 'name' => 'Petr', 'friend_ids' => ['13'], 'enemy_id' => nil },
         '13' => { 'name' => 'Pelat', 'friend_ids' => [], 'enemy_id' => '12' },
@@ -51,7 +53,7 @@ describe BrainstemAdaptor::Record do
     end
 
     context 'collection is not included in response' do
-      let(:response_data) { {} }
+      let(:response_data) { {'count' => 0, 'results' => []} }
 
       specify do
         expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /collection/
@@ -59,7 +61,7 @@ describe BrainstemAdaptor::Record do
     end
 
     context 'record is not listed in collection' do
-      let(:response_data) { { 'users' => {} } }
+      let(:response_data) { {'count' => 0, 'results' => [], 'users' => {} } }
 
       specify do
         expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /record/
@@ -112,6 +114,26 @@ describe BrainstemAdaptor::Record do
 
     specify do
       expect(subject.has_association?('something invalid')).to eq(false)
+    end
+  end
+
+  describe '#association_by_name' do
+    context 'association exists' do
+      specify do
+        expect(subject.association_by_name('friends')).to be_a BrainstemAdaptor::Association
+      end
+    end
+
+    context 'association does not exist' do
+      specify do
+        expect(subject.association_by_name('something wrong')).to be_nil
+      end
+    end
+  end
+
+  context 'no specification set' do
+    specify do
+      expect { described_class.new('test', 1)['any key'] }.not_to raise_error
     end
   end
 end

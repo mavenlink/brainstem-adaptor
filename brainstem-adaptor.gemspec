@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brainstem-adaptor}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.date = %q{2014-03-10}
   s.authors = ["Sergei Zinin (einzige)"]
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Brainstem API wrapper}
 
   s.add_development_dependency 'rspec'
+  s.add_runtime_dependency 'activesupport', ">= 3.0.0"
 end
 
 

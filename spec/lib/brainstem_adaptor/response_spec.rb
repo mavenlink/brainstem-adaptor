@@ -155,5 +155,27 @@ describe BrainstemAdaptor::Response do
     specify do
       expect { subject }.to raise_error ArgumentError, /Expected String/
     end
+
+    context 'count is not returned' do
+      let(:response_data) { { 'results' => [] } }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /count/
+      end
+    end
+
+    context 'results collection is not returned' do
+      let(:response_data) { { 'count' => 0 } }
+
+      specify do
+        expect { subject }.to raise_error BrainstemAdaptor::InvalidResponseError, /results/
+      end
+    end
+  end
+
+  describe '#to_hash' do
+    specify do
+      expect(subject.to_hash).to eq(response_hash)
+    end
   end
 end

@@ -7,6 +7,8 @@ describe BrainstemAdaptor::Association do
 
   let(:response_data) do
     {
+      'count' => 0,
+      'results' => [],
       'users' => {
         '12' => nickolai,
         '13' => ivan,
@@ -28,6 +30,10 @@ describe BrainstemAdaptor::Association do
           },
           'enemy' => {
             'foreign_key' => 'enemy_id',
+            'collection' => 'users'
+          },
+          'mother_in_law' => {
+            'foreign_key' => 'mother_in_law_id',
             'collection' => 'users'
           }
         }
@@ -189,11 +195,41 @@ describe BrainstemAdaptor::Association do
     end
   end
 
-  context 'association does not exist' do
+  context 'association is not included in specification' do
     subject { described_class.new(nickolai_user, 'something wrong') }
 
     specify do
       expect { subject }.to raise_error ArgumentError, /specification/
+    end
+  end
+
+  describe '#has_many?' do
+    specify do
+      expect(nickolai_friends.has_many?).to eq(true)
+    end
+
+    specify do
+      expect(nickolai_enemy.has_many?).to eq(false)
+    end
+  end
+
+  describe '#has_one?' do
+    specify do
+      expect(nickolai_friends.has_one?).to eq(false)
+    end
+
+    specify do
+      expect(nickolai_enemy.has_one?).to eq(true)
+    end
+  end
+
+  describe '#loaded?' do
+    specify do
+      expect(nickolai_user.association_by_name('mother_in_law').loaded?).to eq(false)
+    end
+
+    specify do
+      expect(nickolai_user.association_by_name('friends').loaded?).to eq(true)
     end
   end
 end
