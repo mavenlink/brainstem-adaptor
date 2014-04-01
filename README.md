@@ -1,5 +1,5 @@
 ## Ruby Brainstem Adaptor
-[![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
+[![Build Status](https://travis-ci.org/einzige/brainstem-adaptor.svg?branch=master)](https://travis-ci.org/einzige/brainstem-adaptor)
 [![Dependency Status](https://gemnasium.com/einzige/brainstem-ruby.svg)](https://gemnasium.com/einzige/brainstem-ruby)
 
 Brainstem Adaptor provides an easy to use interface for [Brainstem](https://github.com/mavenlink/brainstem) API.
