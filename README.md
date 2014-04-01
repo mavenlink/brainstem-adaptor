@@ -2,6 +2,18 @@
 [![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
 [![Dependency Status](https://gemnasium.com/einzige/brainstem-ruby.svg)](https://gemnasium.com/einzige/brainstem-ruby)
 
+## Installation
+
+Run:
+```bash
+gem install brainstem-adaptor
+```
+
+Or put in your Gemfile:
+```ruby
+gem 'brainstem-adaptor'
+```
+
 #### Create specification for your API.
 The only thing is missing in Brainstem responses: __associations information__.
 Eg having "customer_ids" field does not guarantee that "customer_ids" are related to "customers" collection, it may be stored in "users" collection.
