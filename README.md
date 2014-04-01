@@ -95,4 +95,4 @@ response = BrainstemAdaptor::Response.new(response_data, BrainstemAdaptor::Speci
 
 ## License
 
-Brainstem Adaptor was created by Mavenlink, Inc. and are available under the MIT License.
+Brainstem Adaptor was created by Mavenlink, Inc. and available under the MIT License.
