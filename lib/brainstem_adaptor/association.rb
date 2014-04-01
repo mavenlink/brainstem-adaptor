@@ -46,7 +46,7 @@ module BrainstemAdaptor
     # Checks if association has been included in request
     # @return [true, false]
     def loaded?
-      !record[foreign_key].nil?
+      (!record[foreign_key].nil?) && (!!record.response[@collection_name].try(:any?))
     end
 
     # @return [Array<BrainstemAdaptor::Record>]

@@ -35,6 +35,10 @@ describe BrainstemAdaptor::Association do
           'mother_in_law' => {
             'foreign_key' => 'mother_in_law_id',
             'collection' => 'users'
+          },
+          'some_empty' => {
+            'foreign_key' => 'friend_ids',
+            'collection' => 'some_empty_collection'
           }
         }
       }
@@ -230,6 +234,10 @@ describe BrainstemAdaptor::Association do
 
     specify do
       expect(nickolai_user.association_by_name('friends').loaded?).to eq(true)
+    end
+
+    specify do
+      expect(nickolai_user.association_by_name('some_empty').loaded?).to eq(false)
     end
   end
 end
