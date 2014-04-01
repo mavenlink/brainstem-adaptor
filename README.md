@@ -1,5 +1,6 @@
 ## Ruby Brainstem adapter
 [![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
+[![Dependency Status](https://gemnasium.com/einzige/brainstem-ruby.svg)](https://gemnasium.com/einzige/brainstem-ruby)
 
 #### Create specification for your API.
 The only thing is missing in Brainstem responses: __associations information__.
