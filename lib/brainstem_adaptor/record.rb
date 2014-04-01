@@ -58,8 +58,6 @@ module BrainstemAdaptor
         raise BrainstemAdaptor::InvalidResponseError, "Can't find '#{collection_name}' association in specification"
       end
 
-      clear
-
       collection = @response[@collection_name] or
         raise BrainstemAdaptor::InvalidResponseError, "No such collection #@collection_name"
 
