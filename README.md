@@ -1,4 +1,4 @@
-## Ruby Brainstem adapter
+## Ruby Brainstem Adaptor
 [![Build Status](http://travis-ci.org/einzige/brainstem-ruby.png?branch=development)](https://travis-ci.org/einzige/brainstem-ruby)
 [![Dependency Status](https://gemnasium.com/einzige/brainstem-ruby.svg)](https://gemnasium.com/einzige/brainstem-ruby)
 
