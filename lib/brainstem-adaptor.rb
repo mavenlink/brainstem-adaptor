@@ -10,7 +10,7 @@ require 'brainstem_adaptor/invalid_response_error'
 require 'brainstem_adaptor/response'
 
 module BrainstemAdaptor
-  VERSION = '0.0.2'
+  VERSION = '0.0.3'
 
   def self.parser
     @parser ||= JSON
