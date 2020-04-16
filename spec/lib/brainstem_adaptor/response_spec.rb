@@ -181,6 +181,17 @@ describe BrainstemAdaptor::Response do
     end
   end
 
+  context "when array input" do
+    subject { described_class.new(response_data, collection_name: collection_name) }
+    let(:response_data) { [{ "id" => "1" }] }
+    let(:collection_name) { "object" }
+
+    it "formats the response data using the array parser" do
+      expect(BrainstemAdaptor::Parsers::ArrayParser).to receive(:parse).with(response_data, collection_name).and_call_original
+      subject
+    end
+  end
+
   describe '#to_hash' do
     specify do
       expect(subject.to_hash).to eq(response_hash)
