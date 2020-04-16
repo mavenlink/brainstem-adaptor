@@ -7,6 +7,7 @@ require 'brainstem_adaptor/specification'
 require 'brainstem_adaptor/association'
 require 'brainstem_adaptor/record'
 require 'brainstem_adaptor/invalid_response_error'
+require 'brainstem_adaptor/parsers/array_parser'
 require 'brainstem_adaptor/response'
 
 module BrainstemAdaptor
