@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brainstem-adaptor}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.date = %q{2014-03-10}
   s.authors = ["Sergei Zinin (einzige)"]
