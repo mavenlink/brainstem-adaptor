@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brainstem-adaptor}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.date = %q{2014-03-10}
-  s.authors = ["Sergei Zinin (einzige)"]
-  s.email = %q{szinin@gmail.com}
-  s.homepage = %q{http://github.com/einzige/brainstem-adaptor}
+  s.authors = ["Mavenlink", "Sergei Zinin (einzige)"]
+  s.email = ["opensource@mavenlink.com", "szinin@gmail.com"]
+  s.homepage = %q{https://github.com/mavenlink/brainstem-adaptor}
 
   s.licenses = ["MIT"]
 

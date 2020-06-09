@@ -4,7 +4,7 @@ module BrainstemAdaptor
 
     # @param response_data [String, Hash]
     # @param specification [BrainstemAdaptor::Specification]
-    def initialize(response_data, specification = BrainstemAdaptor.default_specification)
+    def initialize(response_data, specification = BrainstemAdaptor.default_specification, **options)
       @specification = specification or raise ArgumentError, 'Specification is not set'
 
       case response_data
@@ -12,6 +12,8 @@ module BrainstemAdaptor
         @response_data = BrainstemAdaptor.parser.parse(response_data)
       when Hash
         @response_data = response_data
+      when Array
+        @response_data = BrainstemAdaptor::Parsers::ArrayParser.parse(response_data, options[:collection_name])
       else
         raise ArgumentError, "Expected String, got #{@response_data.class.name}"
       end
